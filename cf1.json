@@ -57,6 +57,11 @@
                   "Effect": "Allow",
                   "Action": [ "dynamodb:PutItem", "dynamodb:Query" ],
                   "Resource": { "Fn::GetAtt": [ "DynamoDBTable", "Arn" ] }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [ "iot:Receive", "iot:GetThingShadow", "iot:UpdateThingShadow" ],
+                  "Resource": "*"
                 }
               ]
             }
@@ -71,7 +76,7 @@
         "Runtime": "nodejs18.x",
         "Handler": "index.main",
         "Code": {
-          "S3Bucket": "your-s3-bucket-name",
+          "S3Bucket": "aprec-blugraph-services",
           "S3Key": "lambda.zip"
         },
         "Role": { "Fn::GetAtt": [ "LambdaExecutionRole", "Arn" ] }
@@ -87,4 +92,3 @@
     }
   }
 }
-
