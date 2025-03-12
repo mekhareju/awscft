@@ -21,6 +21,7 @@
       "Properties": {
         "RuleName": "AnimalUpdatesRule",
         "TopicRulePayload": {
+          "AwsIotSqlVersion": "2016-03-23", 
           "Sql": "SELECT * FROM 'animal/updates'",
           "Actions": [
             {
@@ -62,6 +63,11 @@
                   "Effect": "Allow",
                   "Action": [ "iot:Receive", "iot:GetThingShadow", "iot:UpdateThingShadow" ],
                   "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [ "logs:CreateLogGroup","logs:CreateLogStream", "logs:PutLogEvents" ], 
+                  "Resource": "*"
                 }
               ]
             }
@@ -74,7 +80,7 @@
       "Properties": {
         "FunctionName": "AnimalUpdateHandler",
         "Runtime": "nodejs18.x",
-        "Handler": "index.main",
+        "Handler": "index.mjs.main",
         "Code": {
           "S3Bucket": "aprec-blugraph-services",
           "S3Key": "lambda.zip"
